@@ -10,11 +10,11 @@ import Foundation
 struct DailyScrum: Identifiable {
     let id: UUID
     var title: String
-    var attendees: [String]
+    var attendees: [Attendee]
     var lengthInMinutes: Int
     var theme: Theme
     
-    init(id: UUID = UUID(), title: String, attendees: [String], lengthInMinutes: Int, theme: Theme) {
+    init(id: UUID = UUID(), title: String, attendees: [Attendee], lengthInMinutes: Int, theme: Theme) {
         self.id = id
         self.title = title
         self.attendees = attendees
@@ -25,8 +25,8 @@ struct DailyScrum: Identifiable {
 
 extension DailyScrum {
     static let sampleData: [DailyScrum] = [
-        DailyScrum(title: "Hangout", attendees: ["Doopy Dooper", "Funion Bunion"], lengthInMinutes: 15, theme: .oxblood),
-        DailyScrum(title: "App Dev", attendees: ["Katie", "Gray", "Euna", "Luis", "Darla"], lengthInMinutes: 5, theme: .orange),
-        DailyScrum(title: "Web Dev", attendees: ["Chella", "Chris", "Christina", "Eden", "Karla", "Lindsey", "Aga", "Chad", "Jenn", "Sarah"], lengthInMinutes: 5, theme: .poppy)
+        DailyScrum(title: "Hangout", attendees: [Attendee(name: "Doopy Dooper"), Attendee(name: "Funion Bunion")], lengthInMinutes: 15, theme: .oxblood),
+        DailyScrum(title: "App Dev", attendees: Array(repeating: 0, count: 5).map { _ in Attendee.generateAttendee() }, lengthInMinutes: 5, theme: .orange),
+        DailyScrum(title: "Web Dev", attendees: Array(repeating: 0, count: 9).map { _ in Attendee.generateAttendee() }, lengthInMinutes: 5, theme: .poppy)
     ]
 }
