@@ -13,13 +13,34 @@ struct DailyScrum: Identifiable {
     var attendees: [Attendee]
     var lengthInMinutes: Int
     var theme: Theme
-    
+
     init(id: UUID = UUID(), title: String, attendees: [Attendee], lengthInMinutes: Int, theme: Theme) {
         self.id = id
         self.title = title
         self.attendees = attendees
         self.lengthInMinutes = lengthInMinutes
         self.theme = theme
+    }
+}
+
+extension DailyScrum {
+    static let lengthMinimum: Double = 5
+    static let lengthMaximum: Double = 30
+
+    struct Data {
+        var title: String = ""
+        var attendees: [Attendee] = []
+        var lengthInMinutes: Double = lengthMinimum
+        var theme: Theme = .seafoam
+    }
+    
+    var data: Data {
+        Data(
+            title: title,
+            attendees: attendees,
+            lengthInMinutes: Double(lengthInMinutes),
+            theme: theme
+        )
     }
 }
 
