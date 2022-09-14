@@ -15,7 +15,7 @@ class ScrumTimer: ObservableObject {
         /// Id for Identifiable conformance.
         let id = UUID()
     }
-    
+
     /// The name of the meeting attendee who is speaking.
     @Published var activeSpeaker = ""
     /// The number of seconds since the beginning of the meeting.
@@ -43,34 +43,34 @@ class ScrumTimer: ObservableObject {
         return "Speaker \(speakerIndex + 1): " + speakers[speakerIndex].name
     }
     private var startDate: Date?
-    
+
     /**
      Initialize a new timer. Initializing a time with no arguments creates a ScrumTimer with no attendees and zero length.
      Use `startScrum()` to start the timer.
-     
+
      - Parameters:
         - lengthInMinutes: The meeting length.
         -  attendees: A list of attendees for the meeting.
      */
-    init(lengthInMinutes: Int = 0, attendees: [DailyScrum.Attendee] = []) {
+    init(lengthInMinutes: Int = 0, attendees: [Attendee] = []) {
         self.lengthInMinutes = lengthInMinutes
         self.speakers = attendees.speakers
         secondsRemaining = lengthInSeconds
         activeSpeaker = speakerText
     }
-    
+
     /// Start the timer.
     func startScrum() {
         changeToSpeaker(at: 0)
     }
-    
+
     /// Stop the timer.
     func stopScrum() {
         timer?.invalidate()
         timer = nil
         timerStopped = true
     }
-    
+
     /// Advance the timer to the next speaker.
     func skipSpeaker() {
         changeToSpeaker(at: speakerIndex + 1)
@@ -112,15 +112,15 @@ class ScrumTimer: ObservableObject {
             speakerChangedAction?()
         }
     }
-    
+
     /**
      Reset the timer with a new meeting length and new attendees.
-     
+
      - Parameters:
          - lengthInMinutes: The meeting length.
          - attendees: The name of each attendee.
      */
-    func reset(lengthInMinutes: Int, attendees: [DailyScrum.Attendee]) {
+    func reset(lengthInMinutes: Int, attendees: [Attendee]) {
         self.lengthInMinutes = lengthInMinutes
         self.speakers = attendees.speakers
         secondsRemaining = lengthInSeconds
@@ -135,7 +135,7 @@ extension DailyScrum {
     }
 }
 
-extension Array where Element == DailyScrum.Attendee {
+extension Array where Element == Attendee {
     var speakers: [ScrumTimer.Speaker] {
         if isEmpty {
             return [ScrumTimer.Speaker(name: "Speaker 1", isCompleted: false)]
