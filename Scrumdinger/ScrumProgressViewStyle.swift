@@ -1,6 +1,9 @@
-/*
-See LICENSE folder for this sample’s licensing information.
-*/
+//
+//  ScrumProgressViewStyle.swift
+//  Scrumdinger
+//
+//  Created by ryan on 9/14/22.
+//
 
 import SwiftUI
 
@@ -23,13 +26,5 @@ struct ScrumProgressViewStyle: ProgressViewStyle {
                     .padding(.horizontal)
             }
         }
-    }
-}
-
-struct ScrumProgressViewStyle_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressView(value: 0.4)
-            .progressViewStyle(ScrumProgressViewStyle(theme: .buttercup))
-            .previewLayout(.sizeThatFits)
     }
 }
